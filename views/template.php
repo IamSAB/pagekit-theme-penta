@@ -22,7 +22,7 @@
         <?php if ($params['css']) : ?>
             <?php $view->style('uikit-theme-custom', $view->url($params['css'])) ?>
         <?php else : ?>
-            <?php $view->style('uikit-theme', 'theme:css/uikit.theme-master.min.css') ?>
+            <?php $view->style('uikit-theme', 'theme:css/uikit.theme-penta.min.css') ?>
         <?php endif ?>
         <?php $view->script('uikit-beta', 'theme:js/uikit.min.js') ?>
         <?php $view->script('uikit-beta-icons', 'theme:js/uikit-icons.min.js') ?>
@@ -31,7 +31,7 @@
     <body id="top">
 
         <div class="uk-offcanvas-content">
-            
+
             <?= $view->render('top.php') ?>
 
             <?php foreach ($params['top'] as $pos => $section) : ?>
@@ -39,7 +39,7 @@
                     <?= $view->position('top_'.$pos, 'section.php', ['tmpl' => 'cards.php', 'grid' => true, 'position' => 'top_'.$pos, 'section' => $section]) ?>
                 <?php endif ?>
             <?php endforeach ?>
-            
+
             <?= $view->render('section.php',['position' => 'main', 'tmpl' => 'main.php', 'section' => $params['main']]) ?>
 
             <?php foreach ($params['bottom'] as $pos => $section) : ?>

@@ -1,6 +1,6 @@
 {
     "name": "sab/theme-penta",
-    "type": "pagekit-theme-penta",
+    "type": "pagekit-theme",
     "version": "0.2.1",
     "title": "SAB Theme Penta",
     "description": "A Uikit 3 Beta theme for pagekit",
