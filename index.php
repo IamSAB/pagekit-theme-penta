@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => 'theme-master',
+    'name' => 'theme-penta',
 
     'menus' => [
         'main' => 'Main',

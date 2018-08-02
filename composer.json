@@ -1,9 +1,9 @@
 {
-    "name": "sab/theme-master",
-    "type": "pagekit-theme",
+    "name": "sab/theme-penta",
+    "type": "pagekit-theme-penta",
     "version": "0.2.1",
-    "title": "Uikit 3 Master theme",
-    "description": "A Uikit 3 Beta master theme",
+    "title": "SAB Theme Penta",
+    "description": "A Uikit 3 Beta theme for pagekit",
     "license": "MIT",
     "authors": [
         {
