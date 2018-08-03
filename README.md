@@ -18,3 +18,6 @@ Generally this theme implements almost all Uikit Beta features.
 
 - No automatic build of uikit javascript and less files
 - No default node config setable
+- No versionizing
+- Needs probably rework for broader applicance
+- Breaks on update to Vue.js v2
