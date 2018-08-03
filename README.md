@@ -21,3 +21,21 @@ Generally this theme implements almost all Uikit Beta features.
 - No versionizing
 - Needs probably rework for broader applicance
 - Breaks on update to Vue.js v2
+
+# Setup
+
+- Run `git clone https://github.com/IamSAB/pagekit-theme-penta.git`
+- Do `npm install`
+- cd to pagekit root and do `php pagekit start`
+- open localhost in your browser, enable the theme
+
+# Dev
+
+Run commands below in themes root, after a `npm install`. Be sure to have nodejs and npm installed.
+
+- compile less `npm run gulp`, to watch for changes `npm run gulp watch`
+- run webpack e.g. compile js files `npm run webpack`
+
+# Archive
+
+- export the theme as .zip to deploy it on a production environement `npm run archive`

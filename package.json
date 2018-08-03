@@ -1,7 +1,10 @@
 {
   "name": "theme-master",
   "scripts": {
-    "install": "gulp"
+    "install": "gulp && webpack",
+    "gulp": "gulp",
+    "webpack": "webpack",
+    "archive": "gulp && webpack -p && composer archive --format=zip"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",

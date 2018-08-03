@@ -22,10 +22,9 @@
         <?php if ($params['css']) : ?>
             <?php $view->style('uikit-theme-custom', $view->url($params['css'])) ?>
         <?php else : ?>
-            <?php $view->style('uikit-theme', 'theme:css/uikit.theme-penta.min.css') ?>
+            <?php $view->style('uikit-theme', 'theme:css/theme.css') ?>
         <?php endif ?>
-        <?php $view->script('uikit-beta', 'theme:js/uikit.min.js') ?>
-        <?php $view->script('uikit-beta-icons', 'theme:js/uikit-icons.min.js') ?>
+        <?php $view->script('uikit-beta', 'theme:app/bundle/uikit.js') ?>
     </head>
 
     <body id="top">
