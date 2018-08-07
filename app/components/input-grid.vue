@@ -1,23 +1,13 @@
 <template>
 
     <div class="uk-form-row">
-        <label class="uk-form-label">{{ title }}</label>
+        <label class="uk-form-label">{{ 'Grid' | trans }}</label>
         <div class="uk-form-controls">
-            <input-width :value.sync="grid.width" :child="true"></input-width>
+            <input-width :classes.sync="classes" :child-width="true"></input-width>
             <p class="uk-margin-top uk-form-controls-condensed uk-form-controls-condensed-text">
                 {{ 'Gutter' | trans }}
-                <select class="uk-form-small uk-margin-small-left uk-margin-large-right" v-model="grid.gutter">
-                    <option value="small">{{ 'Small' | trans }}</option>
-                    <option value="medium">{{ 'Medium' | trans }}</option>
-                    <option value="">{{ 'Default' | trans }}</option>
-                    <option value="large">{{ 'Large' | trans }}</option>
-                    <option value="collapse">{{ 'Collapse' | trans }}</option>
-                </select>
-                <input type="checkbox" v-model="grid.divider"><label> {{ 'Use divider' | trans }}</label>
-                <input class="uk-margin-left" type="checkbox" v-model="grid.match"><label> {{ 'Match height' | trans }}</label>
-            </p>
-            <p class="uk-form-controls-condensed uk-form-controls-condensed-text">
-                {{ 'Custom class' | trans }} <input class="uk-margin-small-left uk-form-width-large" type="text" v-model="grid.class">
+                <class-select class="uk-form-small uk-margin-small-left uk-margin-large-right" :classes.sync="classes" :options="gutters" prefix="uk-grid-" :unselected="{index: 1, label: 'Default'}"></class-select>
+                <class-checkboxes :classes.sync="classes" :checkboxes="checkboxes"></class-checkboxes>
             </p>
         </div>
     </div>
@@ -29,10 +19,24 @@
     module.exports = {
 
         props: {
-            grid: Object,
-            title: {
+            classes: {
                 type: String,
-                default: 'Grid'
+                required: true
+            }
+        },
+
+        data: function () {
+            return {
+                gutters: {
+                    small: 'Small',
+                    medium: 'Medium',
+                    large: 'Large',
+                    collapse: 'Collapse',
+                },
+                checkboxes: {
+                    ukGridDivider: 'Use divider',
+                    ukGridMatch: 'Match height'
+                }
             }
         }
 

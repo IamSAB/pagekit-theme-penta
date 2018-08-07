@@ -1,21 +1,15 @@
 <template>
-    
+
     <div>
         <p class="uk-form-controls-condensed">
-            <select class="uk-margin-right uk-form-small" v-model="data.all">
-                <option v-if="!child"value="">{{ '- Select -' | trans }}</option>
-                <option v-for="width in widths" :value="width.value">{{ width.label }}</option>
-            </select>
+            <class-select :classes.sync="classes" :options="widths" :prefix="prefix"></class-select>
             {{ 'On screens larger than' | trans }}
         </p>
         <div class="uk-grid uk-grid-small">
-            <div v-for="(key,label) in sizes" class="uk-flex-item-none">
+            <div v-for="(suffix,label) in breakpoints" class="uk-flex-item-none">
                 <p class="uk-form-controls-condensed">
                     {{ label }}
-                    <select class="uk-margin-small-left uk-form-small" v-model="data[key]">
-                        <option value="">{{ '- Select -' | trans }}</option>
-                        <option v-for="width in widths" :value="width.value">{{ width.label }}</option>
-                    </select>
+                    <class-select :classes.sync="classes" :options="widths" :prefix="prefix" :suffix="'@'+suffix"></class-select>
                 </p>
             </div>
         </div>
@@ -28,12 +22,8 @@
     module.exports =  {
 
         props: {
-            value: String,
-            title: {
-                type: Boolean,
-                default: 'Width'
-            },
-            child: {
+            classes: String,
+            childWidth: {
                 type: Boolean,
                 default: false
             }
@@ -41,55 +31,34 @@
 
         data: function () {
             return {
-                data: {
-                    all:'', s:'', m:'', l:'', xl:''
+                prefix: 'uk-width-',
+                widths: {
+                    auto: 'Auto',
+                    expand: 'Expand',
+                    '1-1': '1/1 100%',
+                    '5-6':'5/6 83%',
+                    '4-5':'4/5 80%',
+                    '3-4':'3/4 75%',
+                    '2-3':'2/3 66%',
+                    '3-5':'3/5 60%',
+                    '1-2':'1/2 50%',
+                    '2-5':'2/5 40%',
+                    '1-3':'1/3 33%',
+                    '1-4':'1/4 25%',
+                    '1-5':'1/5 20%',
+                    '1-6':'1/6 17%',
                 },
-                sizes: { s:'640px', m:'960px', l:'1200px' ,xl:'1600px' }
-            };
+                breakpoints: {
+                    s: 'Mobil (>640px)',
+                    m: 'Tablet (>960px)',
+                    l: 'Laptop (>1200px)',
+                    xl: 'Desktop (>1600px)'
+                },
+            }
         },
 
         created: function () {
-            var arr = this.value.split(','), vm = this, temp = [];
-            _.each(arr, function (el) {
-                temp = el.split('@');
-                if(temp.length == 1) temp.push('all');
-                vm.data[temp[1]] = temp[0];
-                temp = [];
-            })
-        },
-
-        watch: {
-            data: {
-                handler: function () {
-                    var arr = [];
-                    _.each(this.data, function (value,key) {
-                        if(value) arr.push(value + (key == 'all' ? '' : '@' + key));
-                    });
-                    this.value = arr.join();
-                },
-                deep: true
-            }
-        },
-
-        computed: {
-            widths: function () {
-                var arr = [
-                    {value: 'auto', label: 'Auto'},
-                    {value: 'expand', label: 'Expand'}
-                ];
-                for (var i = 1; i < 6; i++) {
-                    for (var j = i; j <= 6; j++) {
-                        if (i != 1) {
-                            if( this.child || j%i == 0 || (i == 4 && j == 6)) continue;
-                        }
-                        arr.push({
-                            value: i + '-' + j,
-                            label: i + '-' + j + ' / ' + _.round(i/j*100) + '%'
-                        });
-                    }
-                }
-                return arr;
-            }
+            if(this.childWidth) this.prefix = 'uk-child-width-';
         }
     }
 

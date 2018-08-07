@@ -5,52 +5,40 @@
         <div class="uk-form-row">
             <label class="uk-form-label">{{ 'Style' | trans }}</label>
             <div class="uk-form-controls">
-                <select class="uk-margin-right" v-model="section.style">
-                    <option value="">{{ 'None' | trans }}</option>
-                    <option value="default">{{ 'Default' | trans }}</option>
-                    <option value="muted">{{ 'Muted' | trans }}</option>
-                    <option value="primary">{{ 'Primary' | trans }}</option>
-                    <option value="secondary">{{ 'Secondary' | trans }}</option>
-                </select>
-                <input type="checkbox" v-model="section.preserve_color"> {{ 'Preserve color' | trans }}
+                <class-select class="uk-margin-right" :classes.sync="section.classes" :options="styles" prefix="uk-section-"></class-select>
+                <class-checkboxes :classes.sync="section.classes" :checkboxes="checkboxes"></class-checkboxes>
             </div>
         </div>
 
         <div class="uk-form-row">
             <label class="uk-form-label">{{ 'Size' | trans }}</label>
             <div class="uk-form-controls">
-                <select v-model="section.size">
-                    <option value="xsmall">{{ 'X-Small' | trans }}</option>
-                    <option value="small">{{ 'Small' | trans }}</option>
-                    <option value="">{{ 'Default' | trans }}</option>
-                    <option value="large">{{ 'Large' | trans }}</option>
-                    <option value="xlarge">{{ 'X-Large' | trans }}</option>
-                </select>
+                <class-select :classes.sync="section.classes" :options="sizes" prefix="uk-section-" :unselected="{index: 2, label: 'Default'}"></class-select>
             </div>
         </div>
 
-        <input-bg :value.sync="section.bg" :color="false"></input-bg>
+        <input-bg :classes.sync="section.bgClasses" :src="section.bgSrc" :color="false"></input-bg>
 
-        <input-inverse :value.sync="section.inverse"></input-inverse>
-        
-        <input-grid v-if="hasGrid" :grid.sync="section.grid" :child="true" :title="'Widget grid' | trans"></input-grid>
+        <div class="uk-form-row">
+            <label class="uk-form-label">{{ 'Inverse' | trans }}</label>
+            <div class="uk-form-controls">
+                <class-select :classes.sync="section.classes" :options="inverse" :unselected="{index: 0, label: 'Default'}"></class-select>
+            </div>
+        </div>
+
+        <input-grid :classes.sync="section.classes"></input-grid>
 
         <div class="uk-form-row">
             <label class="uk-form-label">{{ 'Container size' | trans }}</label>
             <div class="uk-form-controls">
-                <select v-model="section.container_size">
-                    <option value="small">{{ 'Small' | trans }}</option>
-                    <option value="">{{ 'Default' | trans }}</option>
-                    <option value="large">{{ 'Large' | trans }}</option>
-                    <option value="expand">{{ 'Expand' | trans }}</option>
-                </select>
+                <class-select :classes.sync="section.classes" :options="containerSizes" prefix="uk-container-" :unselected="{index: 1, label: 'Default'}"></class-select>
             </div>
         </div>
 
         <div class="uk-form-row">
             <label class="uk-form-label">{{ 'Custom class' | trans }}</label>
             <div class="uk-form-controls">
-                <input type="text" class="uk-form-width-large" v-model="section.class">
+                <input type="text" class="uk-form-width-large" v-model="section.custom">
             </div>
         </div>
 
@@ -61,13 +49,41 @@
 
     module.exports = {
 
-        props: ['type','position','section'],
-        
-        computed: {
-            hasGrid: function () {
-                return _.has(this.section,'grid');
+        props: {
+            section: {
+                type: Object,
+                required: true
+            }
+        },
+
+        data: function () {
+            return {
+                styles: {
+                    default: 'Default',
+                    muted: 'Muted',
+                    primary: 'Primary',
+                    secondary: 'Secondary'
+                },
+                sizes: {
+                    xsmall: 'X Small',
+                    small: 'Small',
+                    large: 'Large',
+                    xlarge: 'X Large'
+                },
+                containerSizes: {
+                    small: 'Small',
+                    large: 'Large',
+                    expand: 'Expand'
+                },
+                inverse: {
+                    ukDark: 'Dark',
+                    ukLight: 'Light'
+                },
+                checkboxes: {
+                    ukPreserveColor: 'Preserve color'
+                }
             }
         }
     }
-    
+
 </script>

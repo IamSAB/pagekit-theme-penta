@@ -3,20 +3,20 @@
         <div class="pk-width-sidebar">
             <div class="uk-panel">
                 <ul class="uk-nav uk-nav-side pk-nav-large" data-uk-tab="{ connect: '#theme-settings' }">
-                    <li><a>{{ 'Navbar' | trans }}</a></li>
-                    <li><a>{{ 'Hero' | trans }}</a></li>
+                    <!-- <li><a>{{ 'Navbar' | trans }}</a></li>
+                    <li><a>{{ 'Hero' | trans }}</a></li> -->
                     <li><a>{{ 'Top' | trans }}</a></li>
-                    <li><a>{{ 'Main' | trans }}</a></li>
+                    <!-- <li><a>{{ 'Main' | trans }}</a></li> -->
                     <li><a>{{ 'Bottom' | trans }}</a></li>
                     <li><a>{{ 'Footer' | trans }}</a></li>
-                    <li><a>{{ 'Extras' | trans }}</a></li>
+                    <!-- <li><a>{{ 'Extras' | trans }}</a></li> -->
                 </ul>
             </div>
         </div>
         <div class="pk-width-content">
             <ul id="theme-settings" class="uk-form uk-form-horizontal uk-switcher">
 
-                <li>
+                <!-- <li>
 
                     <div class="uk-form-row">
                         <label for="form-sidebar-layout" class="uk-form-label">{{ 'Type' | trans }}</label>
@@ -88,7 +88,7 @@
                             </p>
                         </div>
                     </div>
-                    
+
                     <div class="uk-form-row">
                         <label for="form-sidebar-layout" class="uk-form-label">{{ 'Sticky' | trans }}</label>
                         <div class="uk-form-controls">
@@ -115,7 +115,7 @@
                             </template>
                         </div>
                     </div>
-                    
+
                 </li>
 
                 <li>
@@ -207,7 +207,7 @@
                         </div>
                     </div>
                     <input-inverse :value.sync="node.theme.hero.inverse"></input-inverse>
-                </li>
+                </li> -->
 
                 <li>
                     <div class="uk-form-row">
@@ -223,7 +223,7 @@
                     <input-section v-for="(pos,section) in node.theme['top']" v-show="isActiveSection('top',pos)" type="top" :position="pos" :section="section"></input-section>
                 </li>
 
-                <li>
+                <!-- <li>
                     <input-section type="main" position="main" :section="node.theme['main']"></input-section>
                     <input-heading :value.sync="node.theme.main.heading"></input-heading>
                     <input-text :value.sync="node.theme.main.alignment"></input-text>
@@ -254,11 +254,11 @@
                             </p>
                         </div>
                     </div>
-                    
+
                     <input-grid :grid="node.theme.main.top.grid" :child="true" :title="'Main top widget grid' | trans"></input-grid>
                     <input-grid :grid="node.theme.main.bottom.grid" :child="true" :title="'Main bottom widget grid' | trans"></input-grid>
 
-                </li>
+                </li> -->
 
                 <li>
                     <div class="uk-form-row">
@@ -278,7 +278,7 @@
                     <input-section type="footer" position="footer" :section.sync="node.theme['footer']"></input-section>
                 </li>
 
-                <li>
+                <!-- <li>
                     <div class="uk-form-row">
                         <label for="form-hero-height" class="uk-form-label">{{ 'Widget position fixed' | trans }}</label>
                         <div class="uk-form-controls">
@@ -299,13 +299,13 @@
                             </p>
                         </div>
                     </div>
-                </li>
+                </li> -->
 
             </ul>
         </div>
     </div>
 
-    
+
     </div>
 
 </template>
@@ -353,13 +353,13 @@
 
         ready: function () {
 
-            this.sortable = {
-                left: UIkit.sortable($('#sortable-navbar-left'), {group:'navbar'}),
-                center: UIkit.sortable($('#sortable-navbar-center'), {group:'navbar'}),
-                right: UIkit.sortable($('#sortable-navbar-right'), {group:'navbar'})
-            };
+            // this.sortable = {
+            //     left: UIkit.sortable($('#sortable-navbar-left'), {group:'navbar'}),
+            //     center: UIkit.sortable($('#sortable-navbar-center'), {group:'navbar'}),
+            //     right: UIkit.sortable($('#sortable-navbar-right'), {group:'navbar'})
+            // };
 
-            $(this.$el).on('change.uk.sortable', this.updateNavbarLayout);
+            // $(this.$el).on('change.uk.sortable', this.updateNavbarLayout);
         },
 
         methods: {
@@ -391,10 +391,12 @@
 
     };
 
+    Vue.component('class-select', require('./class-select.vue'));
+    Vue.component('class-checkboxes', require('./class-checkboxes.vue'));
     Vue.component('input-grid', require('./input-grid.vue'));
     Vue.component('input-width', require('./input-width.vue'));
     Vue.component('input-bg', require('./input-bg.vue'));
-    Vue.component('input-inverse', require('./input-inverse.vue'));
+    //Vue.component('input-inverse', require('./input-inverse.vue'));
     Vue.component('input-heading', require('./input-heading.vue'));
     Vue.component('input-text', require('./input-text.vue'));
     Vue.component('input-media', function (resolve, reject) {

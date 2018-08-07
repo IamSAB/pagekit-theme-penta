@@ -8,37 +8,15 @@ use Pagekit\Application;
 
 class Theme extends Module
 {
-    const CONFIG_GRID = [
-        'width' => 'auto',
-        'gutter' => '',
-        'match' => true,
-        'divider' => false,
-        'class' => 'uk-flex-center'
-    ];
-
-    const CONFIG_BACKGROUND = [
-        'src' => '',
-        'size' => '',
-        'responsive' => '',
-        'position' => '',
-        'blend' => '',
-        'fixed' => false,
-        'norepeat' => false
-    ];
-
-    const CONFIG_SECTION = [
-        'style' => '',
-        'preserve_color' => false,
-        'size' => '',
-        'inverse' => '',
-        'bg' => self::CONFIG_BACKGROUND,
-        'grid' => self::CONFIG_GRID,
-        'container_size' => '',
-        'class' => '',
-    ];
 
     public function main(Application $app)
     {
+        $section = [
+            'classes' => 'uk-section-primary uk-grid-divider',
+            'bgClasses' => 'uk-background-contain',
+            'custom' => 'uk-flex-center'
+        ];
+
         $this->options['node'] = [
             'navbar' => [
                 'layout' => [
@@ -79,23 +57,23 @@ class Theme extends Module
                 'inverse' => ''
             ],
             'top' => [
-                'a' => self::CONFIG_SECTION,
-                'b' => self::CONFIG_SECTION,
-                'c' => self::CONFIG_SECTION,
-                'd' => self::CONFIG_SECTION,
+                'a' => $section,
+                'b' => $section,
+                'c' => $section,
+                'd' => $section,
             ],
             'bottom' => [
-                'a' => self::CONFIG_SECTION,
-                'b' => self::CONFIG_SECTION,
-                'c' => self::CONFIG_SECTION,
-                'd' => self::CONFIG_SECTION,
+                'a' => $section,
+                'b' => $section,
+                'c' => $section,
+                'd' => $section,
             ],
             'main' => [
                 'style' => '',
                 'preserve_color' => false,
                 'size' => '',
                 'inverse' => '',
-                'bg' => self::CONFIG_BACKGROUND,
+                'bg' => '',
                 'heading' => [
                     'style' => '',
                     'tag' => 'h1'
@@ -111,22 +89,13 @@ class Theme extends Module
                 'sticky_sidebar_a' => false,
                 'sticky_sidebar_b' => false,
                 'top' => [
-                    'grid' => self::CONFIG_GRID
+                    'grid' => ''
                 ],
                 'bottom' => [
-                    'grid' => self::CONFIG_GRID
+                    'grid' => ''
                 ]
             ],
-            'footer' => [
-                'style' => 'secondary',
-                'preserve_color' => false,
-                'size' => 'small',
-                'inverse' => '',
-                'bg' => self::CONFIG_BACKGROUND,
-                'grid' => self::CONFIG_GRID,
-                'container_size' => '',
-                'class' => ''
-            ],
+            'footer' => $section,
             'fixed' => [
                 'position' => 'center-left',
                 'position_modifier' => 'small',
