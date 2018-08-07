@@ -56,18 +56,14 @@ class Theme extends Module
                 'position_modifier' => '',
                 'inverse' => ''
             ],
-            'top' => [
-                'a' => $section,
-                'b' => $section,
-                'c' => $section,
-                'd' => $section,
-            ],
-            'bottom' => [
-                'a' => $section,
-                'b' => $section,
-                'c' => $section,
-                'd' => $section,
-            ],
+            'top_a' => $section,
+            'top_b' => $section,
+            'top_c' => $section,
+            'top_d' => $section,
+            'bottom_a' => $section,
+            'bottom_b' => $section,
+            'bottom_c' => $section,
+            'bottom_d' => $section,
             'main' => [
                 'style' => '',
                 'preserve_color' => false,
@@ -95,7 +91,7 @@ class Theme extends Module
                     'grid' => ''
                 ]
             ],
-            'footer' => $section,
+            'foot' => $section,
             'fixed' => [
                 'position' => 'center-left',
                 'position_modifier' => 'small',

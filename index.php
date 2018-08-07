@@ -35,7 +35,7 @@ return [
         'bottom_b' => 'Bottom B',
         'bottom_c' => 'Bottom C',
         'bottom_d' => 'Bottom D',
-        'footer' => 'Footer',
+        'foot' => 'Footer',
         'fixed' => 'Fixed'
     ],
 
