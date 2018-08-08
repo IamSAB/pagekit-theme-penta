@@ -70,7 +70,6 @@
         },
 
         methods: {
-
             getValue: function (value) {
                 return this.prefix + _.kebabCase(value) + this.suffix;
             }

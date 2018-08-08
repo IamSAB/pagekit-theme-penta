@@ -49,75 +49,9 @@
         components: {
             navbar: require('./navbar.vue'),
             hero: require('./hero.vue'),
-            top: {
-                props: {
-                    node: Object
-                },
-                label: 'Top',
-                template: `
-                    <div>
-                        <switcher @switch="switch" class="uk-subnav uk-subnav-line" :sections="sections" :active="active"></switcher>
-                        <component :is="active" :section.sync="node.theme[active]"></component>
-                    </div>
-                `,
-                data: function () {
-                    return {
-                        active: 'top_a',
-                        sections: {
-                            top_a: 'Top A',
-                            top_b: 'Top B',
-                            top_c: 'Top C',
-                            top_d: 'Top D',
-                        }
-                    }
-                },
-                methods: {
-                    switch: function (name) {
-                        this.active = name;
-                    }
-                },
-                components: {
-                    top_a: require('./section.vue'),
-                    top_b: require('./section.vue'),
-                    top_c: require('./section.vue'),
-                    top_d: require('./section.vue')
-                }
-            },
+            top: require('./top.vue'),
             main: require('./main.vue'),
-            bottom: {
-                props: {
-                    node: Object
-                },
-                label: 'Bottom',
-                template: `
-                    <div>
-                        <switcher @switch="switch" class="uk-subnav uk-subnav-line" :sections="sections" :active="active"></switcher>
-                        <component :is="active" :section.sync="node.theme[active]"></component>
-                    </div>
-                `,
-                data: function () {
-                    return {
-                        active: 'bottom_a',
-                        sections: {
-                            bottom_a: 'Bottom A',
-                            bottom_b: 'Bottom B',
-                            bottom_c: 'Bottom C',
-                            bottom_d: 'Bottom D',
-                        }
-                    }
-                },
-                methods: {
-                    switch: function (name) {
-                        this.active = name;
-                    }
-                },
-                components: {
-                    bottom_a: require('./section.vue'),
-                    bottom_b: require('./section.vue'),
-                    bottom_c: require('./section.vue'),
-                    bottom_d: require('./section.vue')
-                }
-            },
+            bottom: require('./bottom.vue'),
             foot: require('./foot.vue')
         }
 
