@@ -58,6 +58,7 @@
     };
 
     Vue.component('class-select', require('./class-select.vue'));
+    Vue.component('js-opts-select', require('./js-opts-select.vue'));
     Vue.component('class-checkboxes', require('./class-checkboxes.vue'));
     Vue.component('switcher', require('./switcher.vue'));
     Vue.component('input-grid', require('./input-grid.vue'));
