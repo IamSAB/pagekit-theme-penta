@@ -46,15 +46,12 @@ class Theme extends Module
                 ],
             ],
             'hero' => [
+                'classes' => 'uk-position-center',
                 'type' => 'img',
                 'height' => 'viewport',
                 'img' => '',
                 'video' => '',
-                'iframe' => '',
-                'blend' => '',
-                'position' => 'center',
-                'position_modifier' => '',
-                'inverse' => ''
+                'iframe' => ''
             ],
             'top_a' => $section,
             'top_b' => $section,
