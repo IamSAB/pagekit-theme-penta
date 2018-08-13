@@ -1,11 +1,15 @@
 <template>
     <div>
-        Foot
+        Main
     </div>
 </template>
 
 <script>
+
     module.exports = {
-        label: 'Foot'
+
+        path: 'Main.Content'
+
     }
+
 </script>

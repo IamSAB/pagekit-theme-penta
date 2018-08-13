@@ -95,27 +95,26 @@
 
         props: ['widget', 'config'],
 
-        components: {
-            'input-width': require('./input-width.vue'),
-            'input-heading': require('./input-heading.vue'),
-            'input-text': require('./input-text.vue'),
-            'input-visibility': require('./input-visibility.vue')
-        }
+        // components: {
+        //     'input-width': require('./input-width.vue'),
+        //     'input-heading': require('./input-heading.vue'),
+        //     'input-text': require('./input-text.vue'),
+        //     'input-visibility': require('./input-visibility.vue')
+        // }
 
     };
 
-    Vue.component('input-media', function (resolve, reject) {
-        Vue.asset({
-            js: [
-                'app/assets/uikit/js/components/upload.min.js',
-                'app/system/modules/finder/app/bundle/panel-finder.js'
-            ]
-        }).then(function () {
-            resolve(require('./input-media.vue'));
-        })
-    });
+    // Vue.component('input-media', function (resolve, reject) {
+    //     Vue.asset({
+    //         js: [
+    //             'app/assets/uikit/js/components/upload.min.js',
+    //             'app/system/modules/finder/app/bundle/panel-finder.js'
+    //         ]
+    //     }).then(function () {
+    //         resolve(require('./input-media.vue'));
+    //     })
+    // });
 
     window.Widgets.components['theme'] = module.exports;
 
 </script>
-

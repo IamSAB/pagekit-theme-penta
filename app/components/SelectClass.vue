@@ -40,19 +40,15 @@
             },
             unselected: {
                 type: Object,
-                default: function () {
-                    return {index: 0, label: '- Select -'};
-                }
+                default: () => ({index: 0, label: '- Select -'})
             }
         },
 
-        data: function () {
-            return {
-                model: ''
-            }
-        },
+        data: () => ({
+            model: ''
+        }),
 
-        created: function () {
+        created () {
             _.forOwn(this.options, (label,key) => {
                 if (this.classes.includes(this.getValue(key))) {
                     this.model = this.getValue(key);
@@ -70,9 +66,14 @@
         },
 
         methods: {
-            getValue: function (value) {
+
+            getValue (value) {
                 return this.prefix + _.kebabCase(value) + this.suffix;
             }
+
         }
     }
+
+    Vue.component('SelectClass', module.exports);
+
 </script>

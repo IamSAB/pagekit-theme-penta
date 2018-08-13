@@ -36,19 +36,15 @@
             },
             unselected: {
                 type: Object,
-                default: function () {
-                    return {index: 0, label: '- Select -'};
-                }
+                default: () => ({index: 0, label: '- Select -'})
             }
         },
 
-        data: function () {
-            return {
-                model: ''
-            }
-        },
+        data: () => ({
+            model: ''
+        }),
 
-        created: function () {
+        created () {
             var regex = new RegExp('(?<='+this.key+':).*?(?=;)');
             _.forOwn(this.options, (label,value) => {
                 var match = this.value.match(regex);
@@ -73,4 +69,7 @@
             });
         }
     }
+
+    Vue.component('SelectJsOpts', module.exports);
+
 </script>
