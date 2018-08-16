@@ -12,13 +12,14 @@ class Theme extends Module
     public function main(Application $app)
     {
         $position = [
-            'classes' => 'uk-grid-divider',
-            'custom' => 'uk-flex-center'
+            'classes' => 'uk-flex-center uk-flex-middle',
+            'custom' => ''
         ];
 
         $section = [
             'classes' => 'uk-background-cover',
-            'background' => '',
+            'type' => 'bg',
+            'src' => '',
             'custom' => ''
         ];
 
@@ -34,6 +35,10 @@ class Theme extends Module
                     'uk-video' => 'autoplay:inview;automute:true'
                 ],
                 'iframe' => ''
+            ],
+            'Content' => [
+                'heading' => '',
+                'classes' => ''
             ],
             'SectionTopA' => $section,
             'SectionTopB' => $section,

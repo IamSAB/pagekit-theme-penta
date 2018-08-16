@@ -74,6 +74,4 @@
         }
     }
 
-    Vue.component('SelectClass', module.exports);
-
 </script>

@@ -45,6 +45,4 @@
         }
     }
 
-    Vue.component('CheckboxClass', module.exports);
-
 </script>
