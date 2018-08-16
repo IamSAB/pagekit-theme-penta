@@ -4,29 +4,42 @@
         <div class="pk-width-sidebar">
             <div class="uk-panel uk-margin top">
                 <ul class="uk-breadcrumb">
-                    <li v-for="item in breadcrumbs" :class="{'uk-active': item.active}">
+                    <li v-for="item in breadcrumbs" :class="{'uk-active': item.active}" :key="item.path">
                         <span v-if="item.active" @click="path = item.path">{{ item.title }}</span>
                         <a v-else @click="path = item.path">{{ item.title }}</a>
                     </li>
                 </ul>
                 <ul class="uk-nav uk-nav-side pk-nav-large">
-                    <li v-for="item in navigation">
+                    <li v-for="item in navigation" :key="item.path">
                         <a @click="path = item.path">{{ item.title }}</a>
                     </li>
                 </ul>
+                <h3 v-if="!navigation.length" class="uk-text-muted">{{'No child categories' | trans }}</h3>
             </div>
         </div>
         <div class="pk-width-content">
-            <form class="uk-form uk-form-stacked">
-                <ul  v-if="components.length" class="uk-grid uk-grid-medium uk-grid-width-1-2">
-                    <li v-for="item in components">
+            <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-grid-margin>
+                <h3 class="uk-text-muted">{{ components.length }} of {{ settings.length }} {{'settings shown' | trans }}</h3>
+                <ul class="uk-subnav pk-subnav-icon">
+                    <li :class="{'uk-active': view == 'list'}">
+                        <a class="pk-icon-table pk-icon-hover" :title="'List View' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="view = 'list'"></a>
+                    </li>
+                    <li class="{'uk-active': view == 'grid'}">
+                        <a class="pk-icon-thumbnails pk-icon-hover" :title="'Grid View' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="view = 'grid'"></a>
+                    </li>
+                </ul>
+            </div>
+            <form class="uk-form" :class="{'uk-form-horizontal': view == 'list', 'uk-form-stacked': view == 'grid'}">
+                <ul  v-if="components.length" class="uk-grid uk-grid-small" :class="{'uk-grid-width-medium-1-2': view == 'grid'}" data-uk-grid-margin>
+                    <li v-for="item in components" :key="item.path" :class="{'uk-width-1-1': view == 'list'}">
                         <div class="uk-panel uk-panel-box uk-panel-box-secondary">
+                            <div class="uk-panel-badge uk-badge">{{ item.path.split('.').join(' / ') }}</div>
                             <h2 class="uk-panel-title">{{ item.title }}</h2>
                             <component :is="item.component"  :setting.sync="node.theme[item.component]"></component>
                         </div>
                     </li>
                 </ul>
-                 <h3 class="uk-h1 uk-text-muted uk-text-center" v-else>{{ 'No settings found.' | trans }}</h3>
+                <h3 class="uk-h1 uk-text-muted uk-text-center" v-else>{{ 'Navigate to see more settings' | trans }}</h3>
             </form>
         </div>
     </div>
@@ -132,7 +145,7 @@
         },
         PositionFoot = {
             extends: Position,
-            path: 'Foot.Section'
+            path: 'Foot.Position'
         }
 
     module.exports = {
@@ -152,6 +165,7 @@
         data: () => ({
             filter: '',
             path: '',
+            view: 'grid',
             active: ['SectionMain'],
             settings: []
         }),
@@ -166,6 +180,12 @@
                     });
                 }
             });
+        },
+
+        watch: {
+            view () {
+                $(window).trigger("resize");
+            }
         },
 
         computed: {
@@ -301,14 +321,10 @@
 
     }
 
-    Vue.component('InputBackground', require('./InputBackground.vue'));
-
-    import SelectClass from "./SelectClass.vue";
-    import SelectJsOpts from "./SelectJsOpts.vue";
-    import CheckboxClass from "./CheckboxClass.vue";
-
-    import InputUkImage from "./InputUkImage.vue";
-    import InputUkVideo from "./InputUkVideo.vue";
+    Vue.component('SelectClass', require('./SelectClass.vue'));
+    Vue.component('SelectClassResponsive', require('./SelectClassResponsive.vue'));
+    Vue.component('SelectJsOpts', require('./SelectJsOpts.vue'));
+    Vue.component('CheckboxClass', require('./CheckboxClass.vue'));
 
     if (window.$data.node.type != 'link') {
         window.Site.components['node-theme'] = module.exports;
