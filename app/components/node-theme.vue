@@ -53,11 +53,18 @@
 
     // Head
     import Navbar from './setting/Navbar.vue';
-    import Hero from './setting/Hero.vue';
 
     // Top
-    const SectionTopA = {
-        extends: Section,
+    const PositionHero = {
+            extends: Position,
+            path: 'Head.Hero.Position'
+        },
+        SectionHero = {
+            extends: Section,
+            path: 'Head.Hero.Section'
+        },
+        SectionTopA = {
+            extends: Section,
             path: 'Top.A.Section'
         },
         SectionTopB = {
@@ -165,7 +172,7 @@
         data: () => ({
             filter: '',
             path: '',
-            view: 'grid',
+            view: 'list',
             active: ['SectionMain'],
             settings: []
         }),
@@ -294,7 +301,8 @@
 
         components: {
             Navbar,
-            Hero,
+            SectionHero,
+            PositionHero,
             SectionTopA,
             PositionTopA,
             SectionTopB,

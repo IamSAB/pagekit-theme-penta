@@ -1,15 +1,27 @@
 <template>
 
     <div>
-        <div style="margin-bottom: 10px !important;">
+        <div>
             <select-class
                 :classes.sync="classes"
                 :options="options"
                 :prefix="prefix">
             </select-class>
-            {{ 'On devices larger than' | trans }}
+            <span class="uk-margin-left">
+                {{ 'Responsive' | trans }}
+                <a
+                    v-show="responsive == true"
+                    @click="responsive = false"
+                    class="uk-icon-small uk-icon-hover uk-icon-toggle-on">
+                </a>
+                <a
+                    v-show="responsive == false"
+                    @click="responsive = true"
+                    class="uk-icon-small uk-icon-hover uk-icon-toggle-off">
+                </a>
+            </span>
         </div>
-        <div class="uk-grid uk-grid-small" data-uk-grid-margin>
+        <div v-show="responsive" class="uk-grid uk-grid-small" style="margin-top: 10px !important;" data-uk-grid-margin>
             <div v-for="(key,label) in breakpoints" :key="key">
                 <i :class="'uk-icon-'+icons[key]" data-uk-tooltip :title="label"></i>
                 <select-class
@@ -47,7 +59,17 @@
             }
         },
 
+        watch: {
+            responsive (value, old) {
+                const regexp = new RegExp(this.prefix+'[^ ]*@(s|l|m|xl)( |$)','g')
+                if (!value) { //no responsive
+                    this.classes = this.classes.replace(regexp,'')
+                }
+            }
+        },
+
         data: () => ({
+            responsive: false,
             icons: {
                 s: 'mobile',
                 m: 'tablet',

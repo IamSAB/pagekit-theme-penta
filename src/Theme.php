@@ -13,33 +13,31 @@ class Theme extends Module
     {
         $position = [
             'classes' => 'uk-flex-center uk-flex-middle',
+            'height' => '',
+            'ukHeightViewport' => '',
+            'renderAlways' => false,
             'custom' => ''
         ];
 
         $section = [
-            'classes' => 'uk-background-cover',
-            'type' => 'bg',
+            'classes' => '',
+            'cover' => '',
             'src' => '',
+            'container' => '',
             'custom' => ''
         ];
 
         $this->options['node'] = [
-            'Navbar' => [],
-            'Hero' => [
-                'classes' => 'uk-position-center',
-                'type' => 'img',
-                'height' => 'viewport',
-                'img' => '',
-                'video' => [
-                    'src' => '',
-                    'uk-video' => 'autoplay:inview;automute:true'
-                ],
-                'iframe' => ''
+            'Navbar' => [
+                'layout' => 'horizontal-center',
+                'transparent' => false
             ],
             'Content' => [
                 'heading' => '',
                 'classes' => ''
             ],
+            'SectionHero' => $section,
+            'PositionHero' => $position,
             'SectionTopA' => $section,
             'SectionTopB' => $section,
             'SectionTopC' => $section,

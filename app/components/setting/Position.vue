@@ -9,13 +9,13 @@
                     class="uk-form-small"
                     :classes.sync="setting.classes"
                     :options="widths"
-                    :prefix="prefix">
+                    prefix="uk-grid-width-">
                 </select-class-responsive>
             </div>
         </div>
 
         <div class="uk-form-row">
-            <label class="uk-form-label">{{ 'Gutter' | trans }}</label>
+            <label class="uk-form-label">{{ 'Grid Gutter' | trans }}</label>
             <div class="uk-form-controls">
                 <select-class
                     :classes.sync="setting.classes"
@@ -23,6 +23,28 @@
                     prefix="uk-grid-"
                     :unselected="{index: 1, label: 'Default'}">
                 </select-class>
+            </div>
+        </div>
+
+        <div class="uk-form-row">
+            <label class="uk-form-label">{{ 'Grid options' | trans }}</label>
+            <div class="uk-form-controls uk-form-controls-text">
+                <p class="uk-form-controls-condensed">
+                    <label>
+                        {{ 'Use divider' | trans }}
+                        <checkbox-class
+                            :classes.sync="setting.classes"
+                            value="uk-grid-divider">
+                        </checkbox-class>
+                    </label>
+                    <label class="uk-margin-small-left">
+                        {{ 'Match height' | trans }}
+                        <checkbox-class
+                            :classes.sync="setting.classes"
+                            value="uk-grid-match">
+                        </checkbox-class>
+                    </label>
+                </p>
             </div>
         </div>
 
@@ -48,25 +70,56 @@
             </div>
         </div>
 
+
         <div class="uk-form-row">
-            <label class="uk-form-label">{{ 'Options' | trans }}</label>
-            <div class="uk-form-controls uk-form-controls-text">
-                <p class="uk-form-controls-condensed">
-                    <label>
-                        {{ 'Use divider' | trans }}
-                        <checkbox-class
-                            :classes.sync="setting.classes"
-                            value="uk-grid-divider">
-                        </checkbox-class>
-                    </label>
-                    <label class="uk-margin-small-left">
-                        {{ 'Match height' | trans }}
-                        <checkbox-class
-                            :classes.sync="setting.classes"
-                            value="uk-grid-match">
-                        </checkbox-class>
-                    </label>
-                </p>
+            <label for="form-hero-height" class="uk-form-label">{{ 'Fixed height' | trans }}</label>
+            <div class="uk-form-controls">
+                <select v-model="setting.height">
+                    <option value="">{{ 'Disabled' }}</option>
+                    <option value="viewport">{{ 'Viewport' | trans }}</option>
+                    <option value="uk-height-small">{{ '150px' }}</option>
+                    <option value="uk-height-medium">{{ '300px' }}</option>
+                    <option value="uk-height-large">{{ '450px' }}</option>
+                </select>
+                <div v-if="setting.height == 'viewport'" class="uk-grid uk-grid-small uk-margin-small-top" data-uk-grid-margin>
+                    <div>
+                        {{ 'Offset top' | trans }}
+                        <select-js-opts
+                            class="uk-form-small"
+                            :value.sync="setting.ukHeightViewport"
+                            :options="{true: 'True', false: 'False'}"
+                            key="offset-top">
+                        </select-js-opts>
+                    </div>
+                    <div>
+                        {{ 'Offset bottom' | trans }}
+                        <select-js-opts
+                            class="uk-form-small"
+                            :value.sync="setting.ukHeightViewport"
+                            :options="{true: 'True', false: 'False'}"
+                            key="offset-bottom">
+                        </select-js-opts>
+                    </div>
+                    <div>
+                        {{ 'Expand' | trans }}
+                        <select-js-opts
+                            class="uk-form-small"
+                            :value.sync="setting.ukHeightViewport"
+                            :options="{true: 'True', false: 'False'}"
+                            key="expand">
+                        </select-js-opts>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="uk-form-row">
+            <label class="uk-form-label">{{ 'Render' | trans }}</label>
+            <div class="uk-form-controls">
+                <label>
+                    <input type="checkbox" v-model="setting.renderAlways">
+                    {{ 'Render position even if it has not widgets assigned.' | trans }}
+                </label>
             </div>
         </div>
 

@@ -1,10 +1,5 @@
 <template>
-    <select v-model="model" :class="class">
-        <template v-for="(value,label) in options">
-            <option v-if="unselected.index == $index" value="">{{ unselected.label }}</option>
-            <option :value="value">{{ label }}</option>
-        </template>
-    </select>
+    <input v-model="model" v-bind="attrs" lazy>
 </template>
 
 <script>
@@ -26,17 +21,9 @@
                 type: String,
                 required: true
             },
-            options: {
+            attrs: {
                 type: Object,
-                required: true
-            },
-            class: {
-                type: String,
-                default: ''
-            },
-            unselected: {
-                type: Object,
-                default: () => ({index: 0, label: '- Select -'})
+                default: {}
             }
         },
 
@@ -45,14 +32,11 @@
         }),
 
         created () {
-            var regex = new RegExp('(?<='+this.key+':).*?(?=;)');
-            _.forOwn(this.options, (label,value) => {
-                var match = this.value.match(regex);
-                if (match) {
-                    this.model = match;
-                    return false;
-                }
-            });
+            let regex = new RegExp('(?<='+this.key+':).*?(?=;)');
+            if (this.value.match(regex)) {
+                this.model = match;
+                return false;
+            }
             this.$watch('model', function (value,old) {
                 console.log(value); console.log(old);
                 if (value) {

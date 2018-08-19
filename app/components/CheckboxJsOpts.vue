@@ -13,15 +13,12 @@
     module.exports = {
 
         props: {
-            classes: {
+            jsOpts: {
                 type: String,
                 required: true
             },
             key: {
                 type: String,
-                required: true
-            },
-            value: {
                 required: true
             },
             class: {
@@ -35,16 +32,17 @@
         }),
 
         created () {
-            var regex = new RegExp('(?<='+this.key+':).*?(?=;)');
-            if (this.classes.match(regex)) {
+            let regex = new RegExp('(?<='+this.key+':).*?(?=;)'),
+                match = this.jsOpts.match(regex);
+            if (match) {
                 this.model = true
             }
             this.$watch('model', function (value,old) {
                 if (value) {
-                    this.classes += (this.key+':'+value+';')
+                    this.jsOpts += (this.key+':'+value+';')
                 }
-                else if (old && this.classes.match(regex)) { //remove
-                    this.classes = this.classes.replace(regex,'');
+                else if (old && this.jsOpts.match(regex)) { //remove
+                    this.jsOpts = this.jsOpts.replace(regex,'');
                 }
             });
         }
