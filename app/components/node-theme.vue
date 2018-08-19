@@ -2,16 +2,21 @@
 
     <div class="uk-grid pk-grid-large" data-uk-grid-margin>
         <div class="pk-width-sidebar">
-            <div class="uk-panel uk-margin top">
+            <div class="uk-search">
+                <input class="uk-search-field" type="text" v-model="search" debounce="500">
+                <p class="uk-form-help-block">{{ 'Search the path of each setting' | trans }}</p>
+            </div>
+            <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-margin top">
                 <ul class="uk-breadcrumb">
                     <li v-for="item in breadcrumbs" :class="{'uk-active': item.active}" :key="item.path">
-                        <span v-if="item.active" @click="path = item.path">{{ item.title }}</span>
-                        <a v-else @click="path = item.path">{{ item.title }}</a>
+                        <span v-if="item.active" @click="navigate(item.path)">{{ item.title }}</span>
+                        <a v-else @click="navigate(item.path)">{{ item.title }}</a>
                     </li>
                 </ul>
+                <hr>
                 <ul class="uk-nav uk-nav-side pk-nav-large">
                     <li v-for="item in navigation" :key="item.path">
-                        <a @click="path = item.path">{{ item.title }}</a>
+                        <a @click="navigate(item.path)">{{ item.title }}</a>
                     </li>
                 </ul>
                 <h3 v-if="!navigation.length" class="uk-text-muted">{{'No child categories' | trans }}</h3>
@@ -170,6 +175,7 @@
         },
 
         data: () => ({
+            search: '',
             filter: '',
             path: '',
             view: 'list',
@@ -239,10 +245,15 @@
             },
 
             components () {
-                let items = [],
-                    match;
-                var path = _.escapeRegExp(this.path),
-                      reg = (this.path ? new RegExp('(?<=^' + path + '\\.)[^.]*$', 'i') : new RegExp('^[^.]*$', 'i'));
+                let items = [], match, reg;
+                if (this.search) {
+                    const search = _.escapeRegExp(this.search);
+                    reg = new RegExp(search,'i');
+                }
+                else {
+                    const path = _.escapeRegExp(this.path);
+                    reg = (this.path ? new RegExp('(?<=^' + path + '\\.)[^.]*$', 'i') : new RegExp('^[^.]*$', 'i'));
+                }
                 _.each(this.settings, (setting) => {
                     match = setting.path.match(reg);
                     if (match) {
@@ -280,6 +291,11 @@
         },
 
         methods: {
+
+            navigate (path) {
+                this.path = path;
+                this.search = '';
+            },
 
             sort (array) {
                 const sort = ['Head','Top','Main','Bottom','Foot'],
